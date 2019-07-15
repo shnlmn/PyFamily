@@ -63,7 +63,7 @@ class Person:
         relation_age_index = self.clamp(self.age_range_keys.index(self.age_range)+random.randint(*age_diff), 0, len(self.age_ranges)-1)
         relation_age_range = self.age_range_keys[relation_age_index]
         # print(f"Their {relative}'s age range is: { relation_age_range }")
-        return relation_age_rang    e, relative
+        return relation_age_range, relative
 
     def check_relations (self, others):
         # Families are intertwined
