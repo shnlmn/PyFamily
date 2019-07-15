@@ -2,6 +2,7 @@ import yaml
 import random
 import names
 import pandas
+from collections import OrderedDict
 
 config = yaml.safe_load(open("config.yml"))
 with open(config['paths']['FRC']) as csvfile:
@@ -19,7 +20,7 @@ class Person:
     global relation_def
     def __init__(self , age_range = '', last_name = ''):
         self.relation_def = relation_def
-        self.relations = {} # this dict pattern will be {Person<class>: <str>relation}
+        self.relations = OrderedDict() # this dict pattern will be {Person<class>: <str>relation}
         self.age_range = age_range
         self.age_ranges = config['age_ranges']
         self.age_range_keys = list(config["age_ranges"].keys())
@@ -97,6 +98,7 @@ class Person:
 
     def split_relation(self, relation):
         if ":" in relation:
+            print("GOT SPLIT")
             return(random.choice(relation.split(":")).strip())
         else:
             return(relation)
@@ -115,15 +117,21 @@ if __name__ == "__main__":
     num_relatives = random.randint(*config["community"]["family_size_range"])
     print(num_relatives)
     while count < num_relatives:
+        relation_gen = None
         if len(community) == 0:
-            community.append(Person())
+            community.append(Person()) # create the initial family member
             count += 1
-            if community[0].req_relative == True:
-                community.append(community[0].create_relation())
+            print(community[0])
+            if community[0].req_relative:
+                relation_gen = community[0].create_relation()
+                community.append(relation_gen)
                 count +=1
+                print(relation_gen)
         else:
-            community.append(community[-1].create_relation())
+            relation_gen = community[-1].create_relation()
+            community.append(relation_gen)
             count += 1
+            print(relation_gen)
     for c in community:
         c.check_relations(community)
         print(f"{c.full_name} is a {c.sex} in {c.pronouns[2]} {c.age_range} at {c.age}")
