@@ -1,0 +1,119 @@
+community:
+  prime_population: 4
+  relationship_intensity: 10
+  family_relation: spouse, parent, grandparent, child, grandchild, niece_nephew, aunt_uncle, cousin, sibling
+  family_size_range: [1, 8]
+    #mother, father, grandmother, grandfather, son, daughter, grandson, granddaughter, niece, nephew, aunt, uncle, cousin_male, cousin_female
+
+paths:
+  # Families are intertwined
+  # If you are my  ____ : Then your ___ is my ____
+  FRC: FRC.csv
+
+age_ranges:
+  child: [0,10]
+  teen: [11,19]
+  20s: [20,29]
+  30s: [30,39]
+  40s: [40,49]
+  50s: [50,59]
+  60s: [60,69]
+  70s: [70,79]
+  elderly: [80,110]
+
+# list of relative options by age
+age_relatives:
+
+  child:
+    required:
+      [parent, grandparent]
+    other:
+      [sibling, aunt_uncle, cousin]
+  teen:
+    required:
+      [parent, grandparent, aunt_uncle]
+    other:
+      [sibling, cousin]
+  20s:
+    required:
+      []
+    other:
+      [spouse, parent, grandparent, sibling, child, cousin, aunt_uncle, niece_nephew]
+  30s:
+    required:
+      []
+    other:
+      [spouse, parent, grandparent, sibling, child, cousin, aunt_uncle, niece_nephew]
+  40s:
+    required:
+      []
+    other:
+      [spouse, parent, grandparent, sibling, child, cousin, aunt_uncle, niece_nephew]
+  50s:
+    required:
+      []
+    other:
+      [spouse, parent, sibling, child, grandchild, cousin, aunt_uncle, niece_nephew]
+  60s:
+    required:
+      []
+    other:
+      [spouse, parent, sibling, child, grandchild, cousin, aunt_uncle, niece_nephew]
+  70s:
+    required:
+      []
+    other:
+      [spouse, sibling, child, grandchild, cousin, niece_nephew]
+  elderly:
+    required:
+      []
+    other:
+      [spouse, child, grandchild, niece_nephew]
+
+relative_params:
+  sibling:
+    sex:
+      [sister, brother]
+    age_diff:
+      [-1,1]
+  parent:
+    sex:
+      [mother, father]
+    age_diff:
+      [2,3]
+  child:
+    sex:
+      [daughter, son]
+    age_diff:
+      [-3,-2]
+  grandparent:
+    sex:
+      [grandmother, grandfather]
+    age_diff:
+      [3,5]
+  grandchild:
+    sex:
+      [granddaughter, grandson]
+    age_diff:
+      [-5,-3]
+  niece_nephew:
+    sex:
+      [niece_nephew]
+    age_diff:
+      [-3,-1]
+  aunt_uncle:
+    sex:
+      [aunt, uncle]
+    age_diff:
+      [1,3]
+  cousin:
+    sex:
+      [cousin, cousin]
+    age_diff:
+      [-3,3]
+  spouse:
+    sex:
+      [wife, husband]
+    age_diff:
+      [-3,3]
+

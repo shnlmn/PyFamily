@@ -1,0 +1,87 @@
+import random
+import csv
+import pandas
+with open('FRC.csv') as csvfile:
+    relation_def = pandas.read_csv(csvfile, header = 0, index_col = 0)
+
+
+class Person:
+    # Families are intertwined
+    # If you are my  ____ : Then your ___ is my ____
+    global relation_def
+    def random_sex():
+        return (random.choice(["male", "female"]))
+
+    def __init__(self, name, sex=random_sex()):
+        self.relation_def = relation_def
+        self.relations = {}
+        self.name = name
+        self.sex = sex
+
+    # mimics a class function
+    def make_relative(self, name, relation_type, sex=random_sex()):  # factory function to create a relation
+        new_person = type(self)(name, sex)  # make a new instance of person
+        new_person.relations.update({self: self.relation_def[relation_type]["me"]})
+        self.relations.update({new_person: relation_type})
+        return new_person
+
+    def check_relations(self, others):
+        # Families are intertwined
+        # If you are my  ____ : Then your ___ is my ____
+        for other in others:
+            if other is not self and other in self.relations:  # ignore yourself
+                print(f"\nLooking at {other.name}'s relations")
+                for others_relation, others_relation_type in other.relations.items():  # go through current family members relations
+                    if others_relation not in self.relations and others_relation is not self:  # ignore relations already known and yourself
+                        print(f"relations: {others_relation.name} - {others_relation_type}")
+                        #                         print(f"-------------{self.relations}----------------")
+                        tester = self.relation_def[self.relations[other]][other.relations[others_relation]]
+                        self.relations.update(
+                            {others_relation:
+                                 self.split_relation(
+                                     self.relation_def[self.relations[other]][other.relations[others_relation]]
+                                    # bob               bob    Tina   parent  Tina      joan      cousin
+                                 )
+                            })
+                        others_relation.relations.update(
+                            {self:
+                                 self.split_relation(
+                                     self.relation_def[self.relations[others_relation]]['me']
+                                 )
+                            }
+                        )
+    #     def im_your_what(self, relation_type):
+
+    def split_relation(self, relation):
+        if ":" in relation:
+            return(random.choice(relation.split(":")).strip())
+        else:
+            return(relation)
+
+    def __str__(self):
+        return f"{self.name} is {type(self)}"
+
+    def __repr__(self):
+        return f"____ My name is {self.name} and I'm related to {[(x.name, self.relations[x]) for x in self.relations]} ___ \n"
+
+if __name__ == "__main__":
+    person1 = Person("Bob", "male")
+    person2 = person1.make_relative("Tina", "parent", "female")
+    person3 = person2.make_relative("Joan", "cousin", "female")
+    person4 = person3.make_relative("Randy", "sibling", "male")
+    # person4 = person3.make_relative("Randy", "aunt_uncle", "male")
+
+    person5 = person4.make_relative("Calliope", "parent", "female")
+    person6 = person5.make_relative("Jerry", "cousin", "male")
+
+    community = [person1, person2, person3, person4, person5, person6]
+
+    print(repr(person1), repr(person2), repr(person3))
+    for i in community:
+        print(f"===================\n\nLooking at {i.name}\n=================\n")
+        i.check_relations(community)
+
+    for i in community:
+        print(f'{i.name} is a {i.sex}.')
+        for r in i.relations:
+              print(f'{i.name}\'s is related to {r.name}, who is his {i.relations[r]}' )
