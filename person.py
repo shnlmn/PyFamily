@@ -16,6 +16,7 @@ from that number, more people are created:
     2) a total list of likely relatives
     Based on the relation, the new person is given an age range and age
 '''
+random.seed(a=11)
 class Person:
     global relation_def
     def __init__(self , age_range = '', last_name = ''):
@@ -24,7 +25,6 @@ class Person:
         self.age_range = age_range
         self.age_ranges = config['age_ranges']
         self.age_range_keys = list(config["age_ranges"].keys())
-
         self.set_age()
         self.sex, self.pronouns = self.set_sex()
 
@@ -36,6 +36,7 @@ class Person:
         self.all_allowed_relatives = self.allowed_relatives["required"]+self.allowed_relatives["other"]
         self.req_list = self.allowed_relatives["required"]
         self.req_relative = True if self.req_list and len(self.relations) == 0 else False
+
 
     def clamp(self,n, minn, maxn):
         return max(min(maxn, n), minn)
@@ -54,6 +55,7 @@ class Person:
         # print(f"RelationData {relation_data}")
         new_person = cls(relation_data[0], self.last_name)
         self.relations = {new_person: relation_data[1]}
+        new_person.relations.update({self: self.relation_def[self.relations[new_person]]['me']})
         self.req_relative = False
         return new_person
 
