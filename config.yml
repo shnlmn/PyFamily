@@ -26,49 +26,49 @@ age_relatives:
 
   child:
     required:
-      [parent, grandparent]
+      [parent]
     other:
-      [sibling, aunt_uncle, cousin]
+      [sibling]
   teen:
     required:
-      [parent, grandparent, aunt_uncle]
+      [parent]
     other:
-      [sibling, cousin]
+      [sibling]
   20s:
     required:
       []
     other:
-      [spouse, parent, grandparent, sibling, child, cousin, aunt_uncle, niece_nephew]
+      [parent, sibling, child]
   30s:
     required:
       []
     other:
-      [spouse, parent, grandparent, sibling, child, cousin, aunt_uncle, niece_nephew]
+      [parent, sibling, child]
   40s:
     required:
       []
     other:
-      [spouse, parent, grandparent, sibling, child, cousin, aunt_uncle, niece_nephew]
+      [parent, sibling, child]
   50s:
     required:
       []
     other:
-      [spouse, parent, sibling, child, grandchild, cousin, aunt_uncle, niece_nephew]
+      [parent, sibling, child]
   60s:
     required:
       []
     other:
-      [spouse, parent, sibling, child, grandchild, cousin, aunt_uncle, niece_nephew]
+      [sibling, child]
   70s:
     required:
       []
     other:
-      [spouse, sibling, child, grandchild, cousin, niece_nephew]
+      [sibling, child]
   elderly:
     required:
       []
     other:
-      [spouse, child, grandchild, niece_nephew]
+      [sibling, child]
 
 relative_params:
   sibling:
