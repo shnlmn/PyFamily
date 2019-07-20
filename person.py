@@ -16,7 +16,7 @@ from that number, more people are created:
     2) a total list of likely relatives
     Based on the relation, the new person is given an age range and age
 '''
-random.seed(a=11)
+
 class Person:
     global relation_def
     def __init__(self , age_range = '', last_name = ''):
@@ -138,5 +138,5 @@ if __name__ == "__main__":
         c.check_relations(community)
         print(f"{c.full_name} is a {c.sex} in {c.pronouns[2]} {c.age_range} at {c.age}")
         for r in c.relations:
-            print(f"{r.first_name} is {c.pronouns[2]} {c.relations[r]}. ")
+            print(f"{r.first_name:15} | {c.relations[r]}. ")
 
