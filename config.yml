@@ -1,7 +1,7 @@
 community:
   prime_population: 4
   relationship_intensity: 10
-  family_relation: spouse, parent, grandparent, child, grandchild, niece_nephew, aunt_uncle, cousin, sibling
+  family_relation: [spouse, parent, grandparent, child, grandchild, niece_nephew, aunt_uncle, cousin, sibling]
   family_size_range: [4, 5]
     #mother, father, grandmother, grandfather, son, daughter, grandson, granddaughter, niece, nephew, aunt, uncle, cousin_male, cousin_female
 

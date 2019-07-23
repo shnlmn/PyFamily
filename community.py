@@ -1,9 +1,7 @@
 import yaml
 import random
 import person
-from collections import OrderedDict
-from termcolor import colored, cprint
-import termcolor
+from colors import *
 
 config = yaml.safe_load(open('config.yml'))
 
@@ -43,12 +41,12 @@ class Community:
     def create_color(self, age_range, relation):
         color_dict = dict(list(zip(
             config['age_ranges'],
-            list(termcolor.COLORS.keys())
+            list(css_colors.keys())
         )))
         relation_dict = dict(list(zip(
-            config['relations']
+            list(config['community']['family_relation']),list(css_colors.keys())
         )))
-        return color_dict[age_range]
+        return color_dict[age_range], relation_dict[relation]
 
     def generate(self):
         self.community = []
@@ -71,28 +69,7 @@ class Community:
         for c in self.community:
             c.check_relations(self.community)
 
-        for i, c in enumerate(self.community):
-            if i == 0:
-                cprint(f"{c.first_name} is {c.age} and is ",
-                       color = self.create_color(c.age_range),
-                       end='')
-            elif i < len(self.community)-1:
-                cprint(f"{c.first_name}'s ({c.age}) {c.relations[self.community[i-1]]}, who is ",
-                      color = self.create_color(c.age_range),
-                      end='')
-            else:
-                cprint(f"{c.first_name}'s ({c.age}) {c.relations[self.community[i-1]]}.",
-                      color = self.create_color(c.age_range) )
 
-        self.community = sorted(self.community, key=lambda x: x.age, reverse=True)
 
-        for c in self.community:
-            c.relations = OrderedDict(sorted(c.relations.items(), key=lambda x: x[0].age, reverse=True))
-            cprint(f"\n\n{c.full_name} is a {c.sex} in {c.pronouns[2]} {c.age_range} at {c.age}",
-                   color = self.create_color(c.age_range))
-            for r in c.relations:
-                cprint(f"{r.first_name:>10} | {r.age:^4} | {c.relations[r]:<12} ",
-                       color = self.create_color(r.age_range),
-                       end='')
         return self.community
 

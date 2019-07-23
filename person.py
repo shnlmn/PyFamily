@@ -16,6 +16,13 @@ from that number, more people are created:
     2) a total list of likely relatives
     Based on the relation, the new person is given an age range and age
 '''
+# TODO - Bloodline style. 4 generations are created of one bloodline. Grandparents propogate children,
+#  who have children, who have children.
+#   Then a time is established to give everyone an age.
+#   Each person who generates a child also generates a mate of opposite gender.
+#   Then, each person decides if they are married to their mate, single, or married to someone other than the mate.
+#   Each person outside of the bloodline is gen'd a small family (parent, sibling, children from another mate).
+#   These may appear in the story.
 
 class Person:
     global relation_def
@@ -47,6 +54,8 @@ class Person:
 
     # Class Method
     def create_relation(self):
+        # TODO check if individual has more than two parents.
+        #  Either limit parents to two, create spouse/exspouse/step-parent or allow bigamy.
         cls = type(self)
         if self.req_list:
             relation_data = self.get_relation_data(self.req_list)
