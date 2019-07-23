@@ -1,15 +1,16 @@
-ismy,great_grandchild,grandniece_nephew,grandchild,child,niece_nephew,sibling,parent,aunt_uncle,grandparent,great_grandparent,cousin,grandaunt_uncle,spouse
-me,--,--,grandparent,parent,aunt_uncle,sibling,child,niece_nephew,grandchild,--,cousin,grandniece_nephew,spouse
-great_grandchild,--,--,--,--,--,--,--,--,--,--,--,--,--
-grandniece_nephew,--,--,great_grandparent,--,--,--,--,--,--,--,--,--,--
-grandchild,--,--,great_great_grandchild,great_grandchild,great_grandniece_nephew,grandniece_nephew,child,cousin,sibling : cousin,--,cousin,cousin,grandchild
-child,--,--,great_grandchild,grandchild,grandniece_nephew,niece_nephew,sibling,cousin,parent : aunt_uncle,--,cousin,cousin,child
-niece_nephew,--,--,great_grandchild,grandchild,grandniece_nephew,child : niece_nephew,cousin,cousin : sibling,cousin,--,cousin,parent,niece_nephew
-sibling,--,--,grandchild,child,niece_nephew,sibling,aunt_uncle,parent : aunt_uncle,grandaunt_uncle,--,cousin,grandaunt_uncle,sibling
-parent,--,--,child,spouse,sibling,parent,grandparent,grandparent,great_grandparent,--,aunt_uncle,great_grandaunt_uncle,parent
-aunt_uncle,--,--,child,sibling,sibling,aunt_uncle,grandaunt_uncle,grandaunt_uncle,great_grandaunt_uncle,--,parent : aunt_uncle,parent,aunt_uncle
-grandparent,--,--,spouse,parent,parent,grandparent,great_grandparent,great_grandparent,great_great_grandparent,--,grandparent,great_great_grandaunt_uncle,grandparent
-great_grandparent,--,--,great_great_grandparent,--,--,--,--,--,--,--,--,--,--
-cousin,--,--,grandchild,niece_nephew,child : niece_nephew,cousin,cousin,cousin,cousin,--,sibling,grandparent,cousin
-grandaunt_uncle,--,--,sibling,aunt_uncle,grandparent,grandaunt_uncle,great_grandaunt_uncle,great_grandaunt_uncle,--,--,cousin,--,grandaunt_uncle
-spouse,--,--,grandchild,child,niece_nephew,sibling,parent,aunt_uncle,grandparent,--,cousin,grandaunt_uncle,spouse
+ismy,great_grandchild,grandniece_nephew,grandchild,child,niece_nephew,sibling,parent,aunt_uncle,grandparent,great_grandparent,cousin,grandaunt_uncle,spouse,--
+me,--,--,grandparent,parent,aunt_uncle,sibling,child,niece_nephew,grandchild,--,cousin,grandniece_nephew,spouse,--
+great_grandchild,--,--,--,--,--,--,--,--,--,--,--,--,--,--
+grandniece_nephew,--,--,great_grandparent,--,--,--,--,--,--,--,--,--,--,--
+grandchild,--,--,great_great_grandchild,great_grandchild,great_grandniece_nephew,grandniece_nephew,child,cousin,sibling : cousin,--,cousin,cousin,grandchild,--
+child,--,--,great_grandchild,grandchild,grandniece_nephew,niece_nephew,sibling,cousin,parent : aunt_uncle,--,cousin,cousin,child,--
+niece_nephew,--,--,great_grandchild,grandchild,grandniece_nephew,child : niece_nephew,cousin,cousin : sibling,cousin,--,cousin,parent,niece_nephew,--
+sibling,--,--,grandchild,child,niece_nephew,sibling,aunt_uncle,parent : aunt_uncle,grandaunt_uncle,--,cousin,grandaunt_uncle,sibling,--
+parent,--,--,child,spouse,sibling,parent,grandparent,grandparent,great_grandparent,--,aunt_uncle,great_grandaunt_uncle,parent,--
+aunt_uncle,--,--,child,sibling,sibling,aunt_uncle,grandaunt_uncle,grandaunt_uncle,great_grandaunt_uncle,--,parent : aunt_uncle,parent,aunt_uncle,--
+grandparent,--,--,spouse,parent,parent,grandparent,great_grandparent,great_grandparent,great_great_grandparent,--,grandparent,great_great_grandaunt_uncle,grandparent,--
+great_grandparent,--,--,great_great_grandparent,--,--,--,--,--,--,--,--,--,--,--
+cousin,--,--,grandchild,niece_nephew,child : niece_nephew,cousin,cousin,cousin,cousin,--,sibling,grandparent,cousin,--
+grandaunt_uncle,--,--,sibling,aunt_uncle,grandparent,grandaunt_uncle,great_grandaunt_uncle,great_grandaunt_uncle,--,--,cousin,--,grandaunt_uncle,--
+spouse,--,--,grandchild,child,niece_nephew,sibling,parent,aunt_uncle,grandparent,--,cousin,grandaunt_uncle,spouse,--
+--,--,--,--,--,--,--,--,--,--,--,--,--,--,--
