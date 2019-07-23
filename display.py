@@ -8,7 +8,7 @@ import person
 
 from random import seed
 
-seed(a=1)
+seed(a=12)
 
 class Fam_Display(GridLayout):
     def __init__(self, **kwargs):

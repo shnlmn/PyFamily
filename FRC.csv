@@ -5,12 +5,12 @@ grandniece_nephew,--,--,great_grandparent,--,--,--,--,--,--,--,--,--,--,--
 grandchild,--,--,great_great_grandchild,great_grandchild,great_grandniece_nephew,grandniece_nephew,child,cousin,sibling : cousin,--,cousin,cousin,grandchild,--
 child,--,--,great_grandchild,grandchild,grandniece_nephew,niece_nephew,sibling,cousin,parent : aunt_uncle,--,cousin,cousin,child,--
 niece_nephew,--,--,great_grandchild,grandchild,grandniece_nephew,child : niece_nephew,cousin,cousin : sibling,cousin,--,cousin,parent,niece_nephew,--
-sibling,--,--,grandchild,child,niece_nephew,sibling,aunt_uncle,parent : aunt_uncle,grandaunt_uncle,--,cousin,grandaunt_uncle,sibling,--
-parent,--,--,child,spouse,sibling,parent,grandparent,grandparent,great_grandparent,--,aunt_uncle,great_grandaunt_uncle,parent,--
-aunt_uncle,--,--,child,sibling,sibling,aunt_uncle,grandaunt_uncle,grandaunt_uncle,great_grandaunt_uncle,--,parent : aunt_uncle,parent,aunt_uncle,--
-grandparent,--,--,spouse,parent,parent,grandparent,great_grandparent,great_grandparent,great_great_grandparent,--,grandparent,great_great_grandaunt_uncle,grandparent,--
+sibling,--,--,grandchild,child,niece_nephew,sibling,aunt_uncle,parent : aunt_uncle,grandaunt_uncle,--,cousin,grandaunt_uncle,sibling_in_law,--
+parent,--,--,child,spouse,sibling,parent,grandparent,grandparent,great_grandparent,--,aunt_uncle,great_grandaunt_uncle,parent_in_law,--
+aunt_uncle,--,--,child,sibling,sibling,aunt_uncle,grandaunt_uncle,grandaunt_uncle,great_grandaunt_uncle,--,parent : aunt_uncle,parent,aunt_uncle_in_law,--
+grandparent,--,--,spouse,parent,parent,grandparent,great_grandparent,great_grandparent,great_great_grandparent,--,grandparent,great_great_grandaunt_uncle,grandparent_in_law,--
 great_grandparent,--,--,great_great_grandparent,--,--,--,--,--,--,--,--,--,--,--
-cousin,--,--,grandchild,niece_nephew,child : niece_nephew,cousin,cousin,cousin,cousin,--,sibling,grandparent,cousin,--
-grandaunt_uncle,--,--,sibling,aunt_uncle,grandparent,grandaunt_uncle,great_grandaunt_uncle,great_grandaunt_uncle,--,--,cousin,--,grandaunt_uncle,--
-spouse,--,--,grandchild,child,niece_nephew,sibling,parent,aunt_uncle,grandparent,--,cousin,grandaunt_uncle,spouse,--
+cousin,--,--,grandchild,niece_nephew,child : niece_nephew,cousin,cousin,cousin,cousin,--,sibling,grandparent,cousin_in_law,--
+grandaunt_uncle,--,--,sibling,aunt_uncle,grandparent,grandaunt_uncle,great_grandaunt_uncle,great_grandaunt_uncle,--,--,cousin,--,grandaunt_uncle_in_law,--
+spouse,--,--,grandchild_in_law,child,niece_nephew_in_law,sibling_in_law,parent,aunt_uncle_in_law,grandparent_in_law,--,cousin_in_law,grandaunt_uncle_in_law,spouse,--
 --,--,--,--,--,--,--,--,--,--,--,--,--,--,--

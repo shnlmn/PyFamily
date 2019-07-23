@@ -49,6 +49,10 @@ class Community:
         )))
         return color_dict[age_range], relation_dict[relation]
 
+    def spouse_sex(self, i):
+        sexes = ['male', 'female']
+        sexes.remove(i.sex)
+        return sexes[0]
 
     def generate(self):
         self.community = []
@@ -56,29 +60,36 @@ class Community:
         #num_relatives = random.randint(*config["community"]["family_size_range"])
         # print(num_relatives)
 
-        self.community.append(person.Person(age_range=random.choice(["70s", "60s"])))
-        self.community.append(self.community[0].create_relation(relation='spouse', sex='male'))
+        prime = person.Person(age_range=random.choice(["70s", "60s"]))
+        self.community.append(prime)
+        self.community.append(prime.create_relation(relation='spouse', sex=self.spouse_sex(prime)))
 
         for n in range(*self.number_of_children):
+
             parent = self.community[0].create_relation(relation='child')
-            self.community.append(parent.create_relation(relation="spouse"))
+            self.community.append(parent.create_relation(relation="spouse", sex=self.spouse_sex(parent)))
+
             if parent.age_range not in ['child', 'teen']:
                 for t in range(*self.number_of_children):
                     child = parent.create_relation(relation='child')
+
                     if child.age_range not in ['child', 'teen']:
-                        self.community.append(child.create_relation(relation="spouse"))
+
+                        self.community.append(child.create_relation(relation="spouse", sex=self.spouse_sex(child)))
                         for e in range(*self.number_of_children):
                             grandchild = child.create_relation(relation='child')
+
                             self.community.append(grandchild)
+
                     self.community.append(child)
+
             self.community.append(parent)
 
+        self.community = sorted(self.community, key=lambda x: x.age)
         for c in self.community:
             c.check_relations(self.community)
         for c in self.community:
             c.check_relations(self.community)
-
-
 
         return self.community
 

@@ -86,20 +86,35 @@ class Person:
         # Families are intertwined
         # If you are my  ____ : Then your ___ is my ____
         for other in others:
-            if other is not self and other in self.relations:  # ignore yourself and make sure you are in the relations
-                for others_relation, others_relation_type in other.relations.items():  # go through current family members relations
-                    if others_relation not in self.relations and others_relation is not self:  # ignore relations already known and yourself
+
+            # ignore yourself and make sure you are in the relations
+            if other is not self and other in self.relations:
+
+                # go through current family members relations
+                for others_relation, others_relation_type in other.relations.items():
+
+                    # ignore relations already known and yourself
+                    if others_relation not in self.relations and others_relation is not self:
+
+                        # fucking in-laws
+                        who_are_you_to_me = self.relations[other]
+                        who_are_they_to_you = other.relations[others_relation]
+                        print(who_are_they_to_you, who_are_you_to_me)
+                        you_to_me = who_are_you_to_me.replace("_in_law", "")
+                        they_to_you = who_are_they_to_you.replace("_in_law", "")
+
                         self.relations.update(
                             {others_relation:
                                 self.split_relation(
-                                    self.relation_def[self.relations[other]][other.relations[others_relation]]
+                                    self.relation_def[who_are_you_to_me][who_are_they_to_you]
                                     # bob               bob    Tina   parent  Tina      joan      cousin
                                 )
                             })
+                        who_am_i_to_you = self.relations[others_relation]
                         others_relation.relations.update(
                             {self:
                                 self.split_relation(
-                                    self.relation_def[self.relations[others_relation]]['me']
+                                    self.relation_def[who_am_i_to_you]['me']
                                 )
                             }
                         )
