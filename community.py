@@ -2,6 +2,7 @@ import yaml
 import random
 import person
 from colors import *
+import colorsys
 
 config = yaml.safe_load(open('config.yml'))
 
@@ -19,6 +20,20 @@ class Community:
     def __init__(self):
         # self.load_pop()
         self.Person = person.Person
+        self.relation_color = self.set_relation_colors()
+
+    """ get a dict of RGB colors for all the different relations """
+    def set_relation_colors(self):
+        color_dict = {}
+        for i,rel in enumerate( person.relation_def.keys() ):
+            hue = i/len(person.relation_def.keys())
+            rgb = colorsys.hsv_to_rgb(hue, 1, 1)
+            rgb = [int(x*255) for x in rgb]
+            hex = ''.join(['{:02X}'.format(int(round(x)))for x in rgb])
+            print(hex)
+            color_dict.update({rel:hex})
+
+        return color_dict
 
     """ get initial population """
     def load_pop(self):

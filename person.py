@@ -110,14 +110,34 @@ class Person:
                                     # bob               bob    Tina   parent  Tina      joan      cousin
                                 )
                             })
-                        who_am_i_to_you = self.relations[others_relation]
+                        who_am_i_to_them = self.relations[others_relation]
                         others_relation.relations.update(
                             {self:
                                 self.split_relation(
-                                    self.relation_def[who_am_i_to_you]['me']
+                                    self.relation_def[who_am_i_to_them]['me']
                                 )
                             }
                         )
+
+    def scrape_relations(self, other):
+
+        # person makes spouse
+        # spouse checks person for relations
+        # spouse makes child (based on youngest of couple)
+        # child checks parent for relations
+        # all other relations check child for relation
+
+        who_are_you_to_me = self.relations[other]
+
+        for others_relation in other.relations:
+            who_are_they_to_you = other.relations[others_relation]
+            who_am_i_to_them = self.relations[others_relation]
+            if other is not self and other not in self.relations:
+                self.relations.update({
+                    other:
+                        self.relation_def[who_are_you_to_me][who_are_they_to_you]
+                })
+
 
     def set_age(self):
         if self.age_range is '':
