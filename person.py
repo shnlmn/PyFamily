@@ -24,8 +24,11 @@ from that number, more people are created:
 #   Each person outside of the bloodline is gen'd a small family (parent, sibling, children from another mate).
 #   These may appear in the story.
 
+
 class Person:
+
     global relation_def
+
     def __init__(self , age_range = '', last_name = '', sex = ''):
         self.relation_def = relation_def
         self.relations = OrderedDict() # this dict pattern will be {Person<class>: <str>relation}
@@ -44,7 +47,6 @@ class Person:
         self.req_list = self.allowed_relatives["required"]
         self.req_relative = True if self.req_list and len(self.relations) == 0 else False
 
-
     def clamp(self,n, minn, maxn):
         return max(min(maxn, n), minn)
 
@@ -54,16 +56,19 @@ class Person:
 
     # Class Method
     def create_relation(self, relation='', sex=''):
+
         # TODO check if individual has more than two parents.
         #  Either limit parents to two, create spouse/exspouse/step-parent or allow bigamy.
+
         cls = type(self)
+
         if relation:
             relation_data = self.get_relation_data(relation)
         elif self.req_list:
             relation_data = self.get_relation_data(self.req_list)
         else:
             relation_data = self.get_relation_data(self.all_allowed_relatives)
-        # print(f"RelationData {relation_data}")
+
         new_person = cls(relation_data[0], self.last_name, sex)
         self.relations = {new_person: relation_data[1]}
         new_person.relations.update({self: self.relation_def[self.relations[new_person]]['me']})
@@ -71,15 +76,16 @@ class Person:
         return new_person
 
     def get_relation_data(self,relation_type):
+
         if relation_type:
             relative = relation_type
         else:
             relative = random.choice(relation_type)
+
         age_diff = config["relative_params"][relation_type]["age_diff"]
-        # print(f"relative: {relative}. Random age diff: {age_diff}")
         relation_age_index = self.clamp(self.age_range_keys.index(self.age_range)+random.randint(*age_diff), 0, len(self.age_ranges)-1)
         relation_age_range = self.age_range_keys[relation_age_index]
-        # print(f"Their {relative}'s age range is: { relation_age_range }")
+
         return relation_age_range, relative
 
     def check_relations (self, others):
@@ -138,7 +144,6 @@ class Person:
                         self.relation_def[who_are_you_to_me][who_are_they_to_you]
                 })
 
-
     def set_age(self):
         if self.age_range is '':
             self.age_range = random.choice(list(self.age_ranges))
@@ -150,9 +155,9 @@ class Person:
     def split_relation(self, relation):
         if ":" in relation:
             print("GOT SPLIT")
-            return(random.choice(relation.split(":")).strip())
+            return random.choice(relation.split(":")).strip()
         else:
-            return(relation)
+            return relation
 
     def set_sex(self, sex_choice = ''):
         if sex_choice in ("male", "female"):
@@ -163,7 +168,15 @@ class Person:
             pronouns = ["he", "him", "his"]
         else:
             pronouns = ["she", "her", "her"]
-        return(sex, pronouns)
+
+        return sex, pronouns
+
+    def find_relation(self, relationship):
+        return_list = []
+        for k,v in self.relations.items():
+            if v is relationship:
+                return_list.append(k)
+        return return_list
 
 if __name__ == "__main__":
     community = []

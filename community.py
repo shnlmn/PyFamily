@@ -78,12 +78,13 @@ class Community:
         prime = person.Person(age_range=random.choice(["70s", "60s"]))
         self.community.append(prime)
         self.community.append(prime.create_relation(relation='spouse', sex=self.spouse_sex(prime)))
+        # youngest = sorted([prime, prime.relations['spouse']], key=lambda _: _.age)[0]
+        print(f"I am {prime.full_name}, my spouse is {prime.find_relation('spouse')[0].full_name}")
+        youngest = sorted([prime, prime.find_relation("spouse")[0]], key = lambda _: _.age)[0]
 
         for n in range(*self.number_of_children):
 
-            parent = self.community[0].create_relation(relation='child')
-            self.community.append(parent.create_relation(relation="spouse", sex=self.spouse_sex(parent)))
-
+            parent = youngest
             if parent.age_range not in ['child', 'teen']:
                 for t in range(*self.number_of_children):
                     child = parent.create_relation(relation='child')
@@ -91,6 +92,8 @@ class Community:
                     if child.age_range not in ['child', 'teen']:
 
                         self.community.append(child.create_relation(relation="spouse", sex=self.spouse_sex(child)))
+                        youngest = sorted([child, child.find_relation('spouse')[0]], key=lambda _: _.age)[0]
+
                         for e in range(*self.number_of_children):
                             grandchild = child.create_relation(relation='child')
 
