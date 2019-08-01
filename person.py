@@ -29,7 +29,7 @@ class Person:
 
     global relation_def
 
-    def __init__(self , age_range = '', last_name = '', sex = ''):
+    def __init__(self , age_range = '', last_name = '', sex = '', inherited_personality = {}):
         self.relation_def = relation_def
         self.relations = OrderedDict() # this dict pattern will be {Person<class>: <str>relation}
         self.age_range = age_range
@@ -46,6 +46,8 @@ class Person:
         self.all_allowed_relatives = self.allowed_relatives["required"]+self.allowed_relatives["other"]
         self.req_list = self.allowed_relatives["required"]
         self.req_relative = True if self.req_list and len(self.relations) == 0 else False
+        self.personality = self.base_personality(inherited_personality)
+        self.alive = True
 
     def clamp(self,n, minn, maxn):
         return max(min(maxn, n), minn)
@@ -151,6 +153,16 @@ class Person:
         else:
             self.age = random.choice(range(*self.age_ranges[self.age_range]))
         # print(f"My age is {self.age}.")
+
+    @staticmethod
+    def base_personality(inherited):
+        if inherited:
+            personality = {k, v*.01 for k,v in inherited}
+        else:
+            personality = {'intelligence': 0,
+                           'passion': 0,
+                           'empathy': 0}
+        return personality
 
     def split_relation(self, relation):
         if ":" in relation:

@@ -21,6 +21,7 @@ class Community:
         # self.load_pop()
         self.Person = person.Person
         self.relation_color = self.set_relation_colors()
+        self.age_range_keys = list(config["age_ranges"].keys())
 
     """ get a dict of RGB colors for all the different relations """
     def set_relation_colors(self):
@@ -70,9 +71,30 @@ class Community:
         return sexes[0]
 
     def generate(self):
+
+        '''Time is a flat circle
+        Create a person, age them incrementally while randomly adjusting their personality
+        When they reach maturity, they can pick up a mate and child
+        They may also move on to another mate, have more children, or be single'''
+
         self.community = []
+        self.community.append(person.Person(age_range='child'))
+        decade = 0
+        generations = 4 # stop after the youngest of 4 generations have matured
+        generation = 0
+        while generation <= generations:
+            for individual in self.community:
+                if individual.alive:
+                    for k, v in individual.personality:
+                        individual.personality[k] = v*random.random()*10
+                    try:
+                        individual.age_range = self.age_range_keys[
+                            self.age_range_keys.index.(individual.age_range)+1]]
+                    except ValueError:
+                        print(f"{individual.full_name} has died.")
+                        individual.alive = False
         count = 0
-        #num_relatives = random.randint(*config["community"]["family_size_range"])
+        # num_relatives = random.randint(*config["community"]["family_size_range"])
         # print(num_relatives)
 
         prime = person.Person(age_range=random.choice(["70s", "60s"]))
